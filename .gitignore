@@ -9,7 +9,7 @@
 *.war
 *.eargit st
 
-idea/
+.idea/
 target/
 .iml
 .DS_Store
