@@ -1,4 +1,4 @@
-package fr.ups.dl.iaws;
+package fr.ups.dl.iaws.model;
 
 /**
  * Created by manantsoa on 18/03/15.
