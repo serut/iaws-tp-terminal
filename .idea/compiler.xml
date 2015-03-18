@@ -26,5 +26,8 @@
         <module name="iaws-tp-terminal" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="iaws-tp-terminal" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
