@@ -4,6 +4,8 @@ package fr.ups.dl.iaws;
  * Created by Leo on 18/03/15.
  */
 import java.util.concurrent.atomic.AtomicLong;
+
+import fr.ups.dl.iaws.model.Exemple;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,13 @@ public class HelloWorldController {
 
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return "YOLO";
+
+        Exemple e = new Exemple();
+        try {
+            e.run("Jacques");
+            return "YOLO";
+        } catch(Exception er) {
+            return er.getMessage();
+        }
     }
 }
