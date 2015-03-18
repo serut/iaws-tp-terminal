@@ -1,3 +1,8 @@
+.idea/
+target/
+.iml
+.DS_Store
+
 ### Java template
 *.class
 
@@ -7,9 +12,4 @@
 # Package Files #
 *.jar
 *.war
-*.eargit st
-
-.idea/
-target/
-.iml
-.DS_Store
+*.ear
