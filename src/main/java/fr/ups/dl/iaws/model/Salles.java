@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,19 +45,12 @@ public class Salles implements CommandLineRunner {
         }
 
         System.out.println("Querying for customer records where ville = 'Toulouse':");
-        List<Salle> results = jdbcTemplate.query(
-                "select id, numero, ville from salles where ville = ?", new Object[] { "Toulouse" },
-                new RowMapper<Salle>() {
-                    @Override
-                    public Salle mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        return new Salle(rs.getInt("id"), rs.getInt("numero"),
-                                rs.getString("ville"));
-                    }
-                });
+        List<Salle> results = getSallesVille("Toulouse");
 
         for (Salle s : results) {
             System.out.println(s);
         }
+
     }
 
     public List<Salle> getSalles() {
@@ -87,6 +78,20 @@ public class Salles implements CommandLineRunner {
                                 rs.getString("ville"));
                     }
                 });
+        return ls;
+    }
+
+    public List<Salle> getSallesFilm(String id) {
+        List<Salle> ls = new ArrayList<>();
+        /*ls = jdbcTemplate.query(
+                "select id, numero, ville from salles where ville = ?", new Object[] { ville },
+                new RowMapper<Salle>() {
+                    @Override
+                    public Salle mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return new Salle(rs.getInt("id"), rs.getInt("numero"),
+                                rs.getString("ville"));
+                    }
+                });*/
         return ls;
     }
 }

@@ -24,9 +24,11 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="iaws-tp-terminal" />
+        <module name="IAWS-tp-terminal" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="IAWS-tp-terminal" target="1.7" />
       <module name="iaws-tp-terminal" target="1.6" />
     </bytecodeTargetLevel>
   </component>

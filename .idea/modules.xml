@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/iaws-tp-terminal.iml" filepath="$PROJECT_DIR$/iaws-tp-terminal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IAWS-tp-terminal.iml" filepath="$PROJECT_DIR$/IAWS-tp-terminal.iml" />
     </modules>
   </component>
 </project>
