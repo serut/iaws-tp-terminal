@@ -1,5 +1,7 @@
 package fr.ups.dl.iaws.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Created by manantsoa on 18/03/15.
  */
@@ -8,6 +10,7 @@ public class Film {
     String title;
     int year;
 
+    @JsonCreator
     public Film(String id, String title, int year) {
         this.id = id;
         this.title = title;
