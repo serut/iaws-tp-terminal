@@ -26,4 +26,9 @@ public class HelloWorldController {
             return er.getMessage();
         }
     }
+
+    @RequestMapping("/film")
+    public String getFilm(@RequestParam(value="nom", defaultValue="World") String nom, @RequestParam(value="annee", defaultValue="2000") String annee) {
+        return nom + " " + annee;
+    }
 }
