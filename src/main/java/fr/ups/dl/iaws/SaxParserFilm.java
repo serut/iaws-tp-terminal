@@ -26,7 +26,7 @@ public class SaxParserFilm extends DefaultHandler {
         if (qName.equals("Movie")) {
             Film f = new Film(attributes.getValue("imdbID"),
                     attributes.getValue("Title"),
-                    Integer.parseInt(attributes.getValue("Year")));
+                    Integer.parseInt(attributes.getValue("Year").replaceAll("[^0-9]","")));
             films.add(f);
         }
     }

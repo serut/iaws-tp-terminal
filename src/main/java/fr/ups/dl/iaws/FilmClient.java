@@ -23,17 +23,12 @@ public class FilmClient {
         List<Film> films = new ArrayList<Film>();
         Client client = ClientBuilder.newClient();
         WebTarget res = client.target("http://www.omdbapi.com" + "?s=" + title + "&r=xml");
-        //Response response = res.request().get();
 
-
-        String text2;
-        text2 = res.request().get(String.class);
-        //Response rep =  res.request(MediaType.APPLICATION_XML).get();
-        //System.out.println("TEXTE"+ text2);
-        System.out.println("TEXTE"+ text2);
+        String text;
+        text = res.request().get(String.class);
 
         try {
-            films = SAXTreatment(text2);
+            films = SAXTreatment(text);
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -51,15 +46,10 @@ public class FilmClient {
         List<Film> films = new ArrayList<Film>();
         Client client = ClientBuilder.newClient();
         WebTarget res = client.target("http://www.omdbapi.com"
-                + "?s=" + title + "&y=" +  year + "&r=xml");
-        //Response response = res.request().get();
-
+                + "?s=" + title + "&y=" +  String.valueOf(year) + "&r=xml");
 
         String text;
         text = res.request().get(String.class);
-        //Response rep =  res.request(MediaType.APPLICATION_XML).get();
-        //System.out.println("TEXTE"+ text2);
-        System.out.println("TEXTE"+ text);
 
         try {
             films = SAXTreatment(text);
@@ -70,6 +60,8 @@ public class FilmClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println(films.get(0));
 
         client.close();
 
@@ -87,11 +79,11 @@ public class FilmClient {
     }
 
 
-
     public static void main(String[] args) {
         FilmClient f = new FilmClient();
 
         System.out.print(f.filmClientRessourceByTitle("Rings"));
+        System.out.print(f.filmClientRessourceByTitleAndYear("ba", 2010));
 
     }
 }

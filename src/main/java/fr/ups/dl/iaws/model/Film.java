@@ -40,4 +40,6 @@ public class Film {
     public void setYear(int year) {
         this.year = year;
     }
+    
+    public String toString() {return "OMDBId: " + id + " Title: " + title + " Year: " + year;}
 }
