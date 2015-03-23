@@ -17,7 +17,8 @@ import java.util.List;
 @RestController
 public class FilmController {
     @RequestMapping("/film")
-    public String getFilm(@RequestParam(value="nom", defaultValue="") String nom, @RequestParam(value="annee", defaultValue="") String annee) {
+    public String getFilm(@RequestParam(value="nom", defaultValue="") String nom,
+                          @RequestParam(value="annee", defaultValue="") String annee) {
         String result = "";
         try {
             if (nom.isEmpty() && annee.isEmpty()) {
