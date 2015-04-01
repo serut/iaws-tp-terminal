@@ -24,7 +24,7 @@ public class FilmControllerTest extends TestCase {
      */
     @Test
     public void testFilmWithTitleOnimusha() {
-        String s = f.getFilmByTitle("Onimusha");
+        String s = f.getFilmByTitleAndYear("Onimusha", "");
         assertEquals("[{\"id\":\"tt0796361\",\"title\":\"Onimusha: Dawn of Dreams\",\"year\":2006}]", s);
     }
 
