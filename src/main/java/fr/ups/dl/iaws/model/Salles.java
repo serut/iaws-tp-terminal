@@ -54,7 +54,7 @@ public class Salles implements CommandLineRunner {
     }
 
     public List<Salle> getSalles() {
-        List<Salle> ls = new ArrayList<>();
+        List<Salle> ls;
         ls = jdbcTemplate.query(
                 "select id, numero, ville from salles",
                 new RowMapper<Salle>() {
@@ -68,7 +68,7 @@ public class Salles implements CommandLineRunner {
     }
 
     public List<Salle> getSallesVille(String ville) {
-        List<Salle> ls = new ArrayList<>();
+        List<Salle> ls;
         ls = jdbcTemplate.query(
                 "select id, numero, ville from salles where ville = ?", new Object[] { ville },
                 new RowMapper<Salle>() {
