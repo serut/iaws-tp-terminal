@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @RestController
 public class FilmController {
+    @Produces("application/json")
     @RequestMapping("/film")
     public String getFilm(@RequestParam(value="nom", defaultValue="") String nom,
                           @RequestParam(value="annee", defaultValue="") String annee) {

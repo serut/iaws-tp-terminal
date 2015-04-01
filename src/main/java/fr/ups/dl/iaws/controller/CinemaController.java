@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.ups.dl.iaws.model.Film;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/cinema")
 public class CinemaController {
+
+    @Produces("application/json")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getFilm(@PathVariable String id) {
         String result = "";
