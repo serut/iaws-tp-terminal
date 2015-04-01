@@ -4,8 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.ups.dl.iaws.model.Film;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +19,14 @@ import java.util.List;
  * Created by Leo on 23/03/15.
  */
 @RestController
-@RequestMapping("/cinema")
+@Path("cinema")
 public class CinemaController {
 
     @Produces("application/json")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getFilm(@PathVariable String id) {
+    @GET
+    @RequestMapping("film/{id}")
+    @Path("{id}")
+    public String getFilm(@PathVariable @PathParam("id") String id) {
         String result = "";
         try {
             List<Film> listeFilms = new ArrayList<>();
