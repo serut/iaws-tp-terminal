@@ -1,6 +1,7 @@
 package fr.ups.dl.iaws;
 
 
+import fr.ups.dl.iaws.controller.CinemaController;
 import fr.ups.dl.iaws.controller.FilmController;
 import junit.framework.*;
 import org.glassfish.grizzly.PortRange;
@@ -11,7 +12,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.*;
 import org.junit.Test;
 
 import javax.ws.rs.client.Client;
@@ -34,7 +34,7 @@ public class FilmTest {
 
     @Before
     public void setUp() throws Exception {
-        ResourceConfig  rc = new ResourceConfig(FilmController.class);
+        ResourceConfig rc = new ResourceConfig(FilmController.class);
         server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
         server.start();
         c = ClientBuilder.newClient();
@@ -49,7 +49,7 @@ public class FilmTest {
      */
     @org.junit.Test
     public void testFilmAnnee2000() {
-        WebTarget target = c.target("http://localhost:8080/film?annee=2014");
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=2014");
         String responseMsg = target.request().get(String.class);
         Assert.assertEquals("[{\"id\":\"2\",\"title\":\"Lol\",\"year\":2004},{\"id\":\"323242\",\"title\":\"Lol\",\"year\":2004},{\"id\":\"23\",\"title\":\"Lol\",\"year\":2004}]", responseMsg);
     }
@@ -57,7 +57,8 @@ public class FilmTest {
 
     @org.junit.Test
     public void testFilmErreurExceptionPasDeParametre() {
-        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film");
+        System.err.print("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=1940&nom=Fantasia");
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=1940&nom=Fantasia");
         String responseMsg = target.request().get(String.class);
         Assert.assertEquals("{\"error\":true,\"reason\":\"Mauvais usage de l'API de recherche de film. Vous devez spécifier un de ces filtres : nom, annee\"}", responseMsg);
     }
