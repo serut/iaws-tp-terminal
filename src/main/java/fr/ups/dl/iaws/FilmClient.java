@@ -78,13 +78,4 @@ public class FilmClient {
 
         return app.getFilms();
     }
-
-
-    public static void main(String[] args) {
-        FilmClient f = new FilmClient();
-
-        System.out.print(f.filmClientRessourceByTitle("Rings"));
-        System.out.print(f.filmClientRessourceByTitleAndYear("ba", 2010));
-
-    }
 }
