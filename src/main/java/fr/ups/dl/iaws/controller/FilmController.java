@@ -20,7 +20,7 @@ import java.util.List;
 public class FilmController {
     @Produces("application/json")
     @RequestMapping("/film")
-    public String getFilm(@RequestParam(value="nom", defaultValue="") String nom,
+    public String getFilmByTitleAndYear(@RequestParam(value="nom", defaultValue="") String nom,
                           @RequestParam(value="annee", defaultValue="") String annee) {
         String result = "";
         try {
@@ -29,6 +29,29 @@ public class FilmController {
             }
             FilmClient client = new FilmClient();
             List<Film> listeFilms = client.filmClientRessourceByTitleAndYear(nom, Integer.parseInt(annee));
+
+            ObjectMapper mapper = new ObjectMapper();
+            result = mapper.writeValueAsString(listeFilms);
+        } catch (Exception e) {
+            JsonNodeFactory factory = new JsonNodeFactory(false);
+            ObjectNode response = factory.objectNode();
+            response.put("error", true);
+            response.put("reason", e.getMessage());
+            result = response.toString();
+        }
+        return result;
+    }
+
+    @Produces("application/json")
+    @RequestMapping("/film")
+    public String getFilmByTitle(@RequestParam(value="nom", defaultValue="") String nom) {
+        String result = "";
+        try {
+            if (nom.isEmpty()) {
+                throw new Exception("Mauvais usage de l'API de recherche de film. Vous devez spécifier un de ces filtres : nom, annee");
+            }
+            FilmClient client = new FilmClient();
+            List<Film> listeFilms = client.filmClientRessourceByTitle(nom);
 
             ObjectMapper mapper = new ObjectMapper();
             result = mapper.writeValueAsString(listeFilms);
