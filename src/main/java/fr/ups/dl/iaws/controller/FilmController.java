@@ -5,13 +5,16 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.ups.dl.iaws.FilmClient;
 import fr.ups.dl.iaws.model.Film;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +24,12 @@ import java.util.List;
 @RestController
 @Path("film")
 public class FilmController {
+
     @Produces("application/json")
     @GET
     @RequestMapping("/film")
-    public String getFilmByTitleAndYear(@RequestParam(value="nom", defaultValue="") String nom,
-                          @RequestParam(value="annee", defaultValue="") String annee) {
+    public String getFilmByTitleAndYear(@QueryParam("nom") @RequestParam(value="nom", defaultValue="") String nom,
+                                        @QueryParam("annee") @RequestParam(value="annee", defaultValue="") String annee) {
         String result = "";
         try {
             if (nom.isEmpty() && annee.isEmpty()) {

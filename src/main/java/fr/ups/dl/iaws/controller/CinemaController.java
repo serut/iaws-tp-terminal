@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.ups.dl.iaws.model.Film;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.websocket.server.PathParam;
@@ -24,9 +25,9 @@ public class CinemaController {
 
     @Produces("application/json")
     @GET
-    @RequestMapping("film/{id}")
+    @RequestMapping("/cinema/{id}")
     @Path("{id}")
-    public String getFilm(@PathVariable @PathParam("id") String id) {
+    public String getFilm(@PathParam("id") @RequestParam(value="id", defaultValue="") String id) {
         String result = "";
         try {
             List<Film> listeFilms = new ArrayList<>();
