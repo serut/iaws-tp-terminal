@@ -59,7 +59,7 @@ public class FilmTest {
     public void testFilmErreurExceptionPasDeParametre() {
         WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=&nom=");
         String responseMsg = target.request().get(String.class);
-        Assert.assertEquals("{\"error\":true,\"reason\":\"Mauvais usage de l'API de recherche de film. Vous devez spécifier un de ces filtres : nom, annee\"}", responseMsg);
+        Assert.assertEquals("{\"error\":true,\"reason\":\"Mauvais usage de l'API de recherche de film. Vous devez utiliser un de ces filtres : nom, annee\"}", responseMsg);
     }
 
 }
