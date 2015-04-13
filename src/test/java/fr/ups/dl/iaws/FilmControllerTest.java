@@ -24,7 +24,7 @@ public class FilmControllerTest extends TestCase {
      */
     @Test
     public void testFilmWithTitleOnimusha() {
-        String s = f.getFilmByTitle("Onimusha");
+        String s = f.getFilm("Onimusha", 0);
         assertEquals("[{\"id\":\"tt0796361\",\"title\":\"Onimusha: Dawn of Dreams\",\"year\":2006}]", s);
     }
 
@@ -34,7 +34,7 @@ public class FilmControllerTest extends TestCase {
      */
     @Test
     public void testFilmWithTitleFantasiaAndYear2010() {
-        String s = f.getFilmByTitleAndYear("Fantasia", "1940");
+        String s = f.getFilm("Fantasia", 1940);
         assertEquals("[{\"id\":\"tt0032455\",\"title\":\"Fantasia\",\"year\":1940},{\"id\":\"tt0027606\",\"title\":\"Fantasia sottomarina\",\"year\":1940}]",s);
     }
 }

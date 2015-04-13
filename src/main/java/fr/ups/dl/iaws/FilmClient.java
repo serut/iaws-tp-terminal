@@ -20,49 +20,28 @@ import java.util.List;
 
 public class FilmClient {
 
-    public List<Film> filmClientRessourceByTitle(String title) {
+
+    public List<Film> filmClientRessourceByTitleAndYear(String title, int year) throws Exception {
         List<Film> films = new ArrayList<Film>();
         Client client = ClientBuilder.newClient();
-        WebTarget res = client.target("http://www.omdbapi.com" + "?s=" + title + "&r=xml");
+        String urlWebservice = "http://www.omdbapi.com/";
+        if (!title.isEmpty()) {
+            if (year != 0) {
+                urlWebservice += "?s=" + title + "&y=" +  String.valueOf(year);
+            } else {
+                urlWebservice += "?s=" + title;
+            }
+        } else if (year != 0) {
+            // Search only
+            urlWebservice += "?y=" +  String.valueOf(year);
+        }
+        urlWebservice += "&r=xml";
+        WebTarget res = client.target(urlWebservice);
 
         String text;
         text = res.request().get(String.class);
 
-        try {
-            films = SAXTreatment(text);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        client.close();
-
-        return films;
-    }
-
-    public List<Film> filmClientRessourceByTitleAndYear(String title, int year) {
-        List<Film> films = new ArrayList<Film>();
-        Client client = ClientBuilder.newClient();
-        WebTarget res = client.target("http://www.omdbapi.com"
-                + "?s=" + title + "&y=" +  String.valueOf(year) + "&r=xml");
-
-        String text;
-        text = res.request().get(String.class);
-
-        try {
-            films = SAXTreatment(text);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(films.get(0));
+        films = SAXTreatment(text);
 
         client.close();
 
@@ -77,14 +56,5 @@ public class FilmClient {
         saxParser.parse(new InputSource(new StringReader(s)), app);
 
         return app.getFilms();
-    }
-
-
-    public static void main(String[] args) {
-        FilmClient f = new FilmClient();
-
-        System.out.print(f.filmClientRessourceByTitle("Rings"));
-        System.out.print(f.filmClientRessourceByTitleAndYear("ba", 2010));
-
     }
 }
