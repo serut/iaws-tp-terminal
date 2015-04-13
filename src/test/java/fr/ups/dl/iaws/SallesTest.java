@@ -13,11 +13,11 @@ import java.util.List;
  * Created by Cédric Rohaut (@Oxynos) on 01/04/2015 10:25.
  */
 public class SallesTest {
-    private Salles salles;
+    //private Salles salles;
 
     @Before
     public void setUp() throws Exception {
-        Salle s1 = new Salle(1, 1, "Toulouse");
+        /*Salle s1 = new Salle(1, 1, "Toulouse");
         Salle s2 = new Salle(2, 2, "Toulouse");
         Salle s3 = new Salle(3, 1, "Paris");
         Salle s4 = new Salle(4, 2, "Paris");
@@ -25,7 +25,8 @@ public class SallesTest {
         ls.add(s1);
         ls.add(s2);
         ls.add(s3);
-        ls.add(s4);
+        ls.add(s4);*/
+        //salles = new Salles();
 
     }
 
@@ -35,6 +36,10 @@ public class SallesTest {
 
     @org.junit.Test
     public void testGetSalles() {
+        /*List<Salle> ls = Salles.getSalles();
+        for (Salle s : ls) {
+            System.out.println(s);
+        }*/
         //assertEquals();
     }
 

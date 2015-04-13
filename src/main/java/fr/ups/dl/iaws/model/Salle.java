@@ -20,6 +20,12 @@ public class Salle {
         this.ville = ville;
     }
 
+    public Salle(int id, int numero) {
+        this.id = id;
+        this.numero = numero;
+        this.ville = "";
+    }
+
     public int getId() {
         return id;
     }
