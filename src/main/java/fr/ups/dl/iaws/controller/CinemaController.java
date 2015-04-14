@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.ups.dl.iaws.model.Film;
+import fr.ups.dl.iaws.model.Salle;
+import fr.ups.dl.iaws.model.Salles;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,17 +26,31 @@ import java.util.List;
 @Path("cinema")
 public class CinemaController {
 
+
+    @Autowired
+    private Salles salles;
+
+
     @Produces("application/json")
     @GET
-    @RequestMapping("/cinema/{id}")
-    @Path("{id}")
-    public String getFilm(@PathParam("id") @RequestParam(value="id", defaultValue="") String id) {
+    @RequestMapping("/cinema")
+    public String getSalles(@PathParam("ville") @RequestParam(value="ville", defaultValue="") String ville,
+                            @PathParam("is3D") @RequestParam(value="is3D", defaultValue="") String is3DAsString,
+                            @PathParam("isImax") @RequestParam(value="isImax", defaultValue="") String isImaxAsString) {
         String result = "";
         try {
-            List<Film> listeFilms = new ArrayList<>();
-            listeFilms.add(new Film("2", "Lol", 2004));
-            listeFilms.add(new Film("323242", "Lol", 2004));
-            listeFilms.add(new Film("23", "Lol", 2004));
+            if (ville.isEmpty() && isImaxAsString.isEmpty() && is3DAsString.isEmpty()) {
+                throw new Exception("Mauvais usage de l'API de recherche de salle de cinéma. Vous devez utiliser un de ces filtres : ville, is3D, isImax");
+            }
+            Boolean is3D = null;
+            Boolean isImax = null;
+            if (! is3DAsString.isEmpty()) {
+                is3D = is3DAsString.equals("true");
+            }
+            if (! isImaxAsString.isEmpty()) {
+                isImax = isImaxAsString.equals("true");
+            }
+            List<Salle> listeFilms = salles.getSalles(ville, isImax, is3D);
 
             ObjectMapper mapper = new ObjectMapper();
             result = mapper.writeValueAsString(listeFilms);

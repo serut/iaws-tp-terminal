@@ -25,12 +25,12 @@ public class Salles implements CommandLineRunner {
         System.out.println("Creating tables");
         jdbcTemplate.execute("drop table salles if exists");
         jdbcTemplate.execute("create table salles(" +
-                "id serial, numero INTEGER, ville varchar(255))");
+                "id serial, numero INTEGER, ville varchar(255), isImax boolean, is3D boolean)");
 
-        Salle s1 = new Salle(1, 1, "Toulouse");
-        Salle s2 = new Salle(2, 2, "Toulouse");
-        Salle s3 = new Salle(3, 1, "Paris");
-        Salle s4 = new Salle(4, 2, "Paris");
+        Salle s1 = new Salle(1, 1, "Toulouse", true, false);
+        Salle s2 = new Salle(2, 2, "Toulouse", false, true);
+        Salle s3 = new Salle(3, 1, "Paris", false, false);
+        Salle s4 = new Salle(4, 2, "Paris", true, true);
         List<Salle> ls = new ArrayList<>();
         ls.add(s1);
         ls.add(s2);
@@ -40,15 +40,8 @@ public class Salles implements CommandLineRunner {
         for (Salle s : ls) {
             System.out.println("Inserting record : " + s.toString());
             jdbcTemplate.update(
-                    "INSERT INTO salles(numero, ville) values(?,?)",
-                    s.getNumero(), s.getVille());
-        }
-
-        System.out.println("Querying for customer records where ville = 'Toulouse':");
-        List<Salle> results = getSallesVille("Toulouse");
-
-        for (Salle s : results) {
-            System.out.println(s);
+                    "INSERT INTO salles(numero, ville, isImax, is3D) values(?,?,?,?)",
+                    s.getNumero(), s.getVille(), s.isImax(), s.is3D());
         }
 
     }
@@ -61,21 +54,45 @@ public class Salles implements CommandLineRunner {
                     @Override
                     public Salle mapRow(ResultSet rs, int rowNum) throws SQLException {
                         return new Salle(rs.getInt("id"), rs.getInt("numero"),
-                                rs.getString("ville"));
+                                rs.getString("ville"), rs.getBoolean("isImax"), rs.getBoolean("is3D"));
                     }
                 });
         return ls;
     }
 
-    public List<Salle> getSallesVille(String ville) {
+    public List<Salle> getSalles(String ville, Boolean isImax, Boolean is3D) {
         List<Salle> ls;
+        List<Object> param = new ArrayList<Object>();
+        String sqlQuery = "select id, numero, ville, isImax, is3D from salles where ";
+        boolean addAnd = false;
+
+        if (! ville.isEmpty()) {
+            sqlQuery += "ville = ? ";
+            param.add(ville);
+            addAnd = true;
+        }
+        if (isImax != null) {
+            if (addAnd) {
+                sqlQuery += " and ";
+            }
+            sqlQuery += "isImax = ? ";
+            param.add(isImax.booleanValue());
+            addAnd = true;
+        }
+        if (is3D != null) {
+            if (addAnd) {
+                sqlQuery += " and ";
+            }
+            sqlQuery += "is3D = ? ";
+            param.add(is3D.booleanValue());
+        }
         ls = jdbcTemplate.query(
-                "select id, numero, ville from salles where ville = ?", new Object[] { ville },
+                sqlQuery, param.toArray(),
                 new RowMapper<Salle>() {
                     @Override
                     public Salle mapRow(ResultSet rs, int rowNum) throws SQLException {
                         return new Salle(rs.getInt("id"), rs.getInt("numero"),
-                                rs.getString("ville"));
+                                rs.getString("ville"), rs.getBoolean("isImax"), rs.getBoolean("is3D"));
                     }
                 });
         return ls;

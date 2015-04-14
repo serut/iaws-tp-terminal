@@ -7,6 +7,8 @@ public class Salle {
     private int id;
     private int numero;
     private String ville;
+    private boolean isImax;
+    private boolean is3D;
 
     public Salle() {
         this.id = 0;
@@ -14,16 +16,13 @@ public class Salle {
         this.ville = "VILLE";
     }
 
-    public Salle(int id, int numero, String ville) {
+    @JsonCreator
+    public Salle(int id, int numero, String ville, boolean isImax, boolean is3D) {
         this.id = id;
         this.numero = numero;
         this.ville = ville;
-    }
-
-    public Salle(int id, int numero) {
-        this.id = id;
-        this.numero = numero;
-        this.ville = "";
+        this.is3D = is3D;
+        this.isImax = isImax;
     }
 
     public int getId() {
@@ -48,6 +47,22 @@ public class Salle {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public boolean is3D() {
+        return is3D;
+    }
+
+    public void set3D(boolean is3D) {
+        this.is3D = is3D;
+    }
+
+    public boolean isImax() {
+        return isImax;
+    }
+
+    public void setImax(boolean isImax) {
+        this.isImax = isImax;
     }
 
     @Override

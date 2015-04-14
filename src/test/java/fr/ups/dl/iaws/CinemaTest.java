@@ -21,35 +21,51 @@ import java.net.URI;
  */
 public class CinemaTest extends TestCase {
 
-    private WebTarget target;
-    private static int port = 8987;
+    private static int port = 8080;
     private Client c;
-    private HttpServer server;
     public static final URI BASE_URI = UriBuilder.fromUri("http://localhost").port(port).build();
 
     @Before
     public void setUp() throws Exception {
-        ResourceConfig rc = new ResourceConfig(CinemaController.class);
-        server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
-        server.start();
         c = ClientBuilder.newClient();
-    }
-    @After
-    public void tearDown() throws Exception {
-        server.shutdown();
     }
 
     /**
-     * Test to see that the message "Got it!" is sent in the response.
      */
     @org.junit.Test
-    public void testGetCinema() {
-        while(!server.isStarted()) {
-
-        }
-        WebTarget target = c.target("http://localhost:8987/cinema/1");
+    public void testExceptionGetCinema() {
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/cinema?ville=&is3D=&isImax=");
         String responseMsg = target.request().get(String.class);
-        assertEquals("[{\"id\":\"2\",\"title\":\"Lol\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=2&r=xml\"},{\"id\":\"323242\",\"title\":\"Lol\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=323242&r=xml\"},{\"id\":\"23\",\"title\":\"Lol\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=23&r=xml\"}]", responseMsg);
+        Assert.assertEquals("{\"error\":true,\"reason\":\"Mauvais usage de l'API de recherche de salle de cinéma. Vous devez utiliser un de ces filtres : ville, is3D, isImax\"}", responseMsg);
     }
+
+    /**
+     */
+    @org.junit.Test
+    public void testGetCinemaParVille() {
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/cinema?ville=Toulouse&is3D=&isImax=");
+        String responseMsg = target.request().get(String.class);
+        Assert.assertEquals("[{\"id\":1,\"numero\":1,\"ville\":\"Toulouse\",\"3D\":false,\"imax\":true},{\"id\":2,\"numero\":2,\"ville\":\"Toulouse\",\"3D\":true,\"imax\":false}]", responseMsg);
+    }
+
+    /**
+     */
+    @org.junit.Test
+    public void testGetCinemaEn3D() {
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/cinema?ville=&is3D=true&isImax=");
+        String responseMsg = target.request().get(String.class);
+        Assert.assertEquals("[{\"id\":2,\"numero\":2,\"ville\":\"Toulouse\",\"3D\":true,\"imax\":false},{\"id\":4,\"numero\":2,\"ville\":\"Paris\",\"3D\":true,\"imax\":true}]", responseMsg);
+    }
+
+    /**
+     */
+    @org.junit.Test
+    public void testGetCinemaEnImax() {
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/cinema?ville=&is3D=&isImax=true");
+        String responseMsg = target.request().get(String.class);
+        Assert.assertEquals("[{\"id\":1,\"numero\":1,\"ville\":\"Toulouse\",\"3D\":false,\"imax\":true},{\"id\":4,\"numero\":2,\"ville\":\"Paris\",\"3D\":true,\"imax\":true}]", responseMsg);
+    }
+
+
 
 }
