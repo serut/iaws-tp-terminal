@@ -1,18 +1,13 @@
 package fr.ups.dl.iaws;
 
 
-import fr.ups.dl.iaws.controller.CinemaController;
 import fr.ups.dl.iaws.controller.FilmController;
-import junit.framework.*;
-import org.glassfish.grizzly.PortRange;
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.grizzly.http.server.NetworkListener;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

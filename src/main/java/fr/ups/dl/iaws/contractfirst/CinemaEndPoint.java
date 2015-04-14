@@ -25,9 +25,9 @@ public class CinemaEndPoint {
         @ResponsePayload
         public void handleCinemaRequest(@XPathParam("/CinemaRequest/id") int id) throws Exception {
 
-            salles =  serviceSalle.getSallesFilm(String.valueOf(id));
+            /*salles =  serviceSalle.getSallesFilm(String.valueOf(id));
 
-            /*Element elt = XmlHelper.getRootElementFromFileInClasspath("ReleveNotes.xml") ;
+            Element elt = XmlHelper.getRootElementFromFileInClasspath("ReleveNotes.xml") ;
             return  elt;*/
             System.out.println(id);
         }

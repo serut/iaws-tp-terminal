@@ -5,9 +5,9 @@ package fr.ups.dl.iaws.model;
  */
 public class FilmSalle {
     private int idSalle;
-    private int idFilm;
+    private String idFilm;
 
-    public FilmSalle(int idSalle, int idFilm) {
+    public FilmSalle(int idSalle, String idFilm) {
         this.idSalle = idSalle;
         this.idFilm = idFilm;
     }
@@ -20,11 +20,11 @@ public class FilmSalle {
         this.idSalle = idSalle;
     }
 
-    public int getIdFilm() {
+    public String getIdFilm() {
         return idFilm;
     }
 
-    public void setIdFilm(int idFilm) {
+    public void setIdFilm(String idFilm) {
         this.idFilm = idFilm;
     }
 }

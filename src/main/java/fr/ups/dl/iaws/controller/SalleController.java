@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fr.ups.dl.iaws.model.Film;
+import fr.ups.dl.iaws.model.FilmSalle;
 import fr.ups.dl.iaws.model.Salle;
 import fr.ups.dl.iaws.model.Salles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ import java.util.List;
  * Created by Leo on 23/03/15.
  */
 @RestController
-@Path("cinema")
-public class CinemaController {
+@Path("salle")
+public class SalleController {
 
 
     @Autowired
@@ -33,7 +34,7 @@ public class CinemaController {
 
     @Produces("application/json")
     @GET
-    @RequestMapping("/cinema")
+    @RequestMapping("/salle")
     public String getSalles(@PathParam("ville") @RequestParam(value="ville", defaultValue="") String ville,
                             @PathParam("is3D") @RequestParam(value="is3D", defaultValue="") String is3DAsString,
                             @PathParam("isImax") @RequestParam(value="isImax", defaultValue="") String isImaxAsString) {
