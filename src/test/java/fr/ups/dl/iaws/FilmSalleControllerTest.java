@@ -32,6 +32,11 @@ public class FilmSalleControllerTest extends TestCase {
         WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/filmSalle?idFilm=1234567a&idSalle=1");
         String responseMsg = target.request().get(String.class);
         Assert.assertEquals("{\"error\":false}", responseMsg);
+
+
+        target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/filmSalle/1234567a");
+        responseMsg = target.request().get(String.class);
+        Assert.assertEquals("[{\"id\":1,\"numero\":1,\"ville\":\"Toulouse\",\"imax\":true,\"3D\":false}]", responseMsg);
     }
 
 

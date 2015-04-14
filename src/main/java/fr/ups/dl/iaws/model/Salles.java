@@ -29,9 +29,12 @@ public class Salles implements CommandLineRunner {
                 "id bigint auto_increment, numero INTEGER, ville varchar(255), isImax boolean, is3D boolean)");
 
 
-        jdbcTemplate.execute("drop table FilmSalle if exists");
+        jdbcTemplate.execute("drop table film_salle if exists");
         jdbcTemplate.execute("create table film_salle(" +
-                "id  bigint auto_increment, id_salle bigint, id_film varchar(255), isImax boolean, is3D boolean)");
+                "id  bigint auto_increment, id_salle bigint, id_film varchar(255)," +
+                "CONSTRAINT UNIQUE_FILM_SALLE UNIQUE (id_salle,id_film));");
+
+
 
         Salle s1 = new Salle(1, 1, "Toulouse", true, false);
         Salle s2 = new Salle(2, 2, "Toulouse", false, true);
@@ -123,17 +126,20 @@ public class Salles implements CommandLineRunner {
         return ls;
     }
 
-    public List<Salle> getSallesFilm(String id) {
+    public List<Salle> getSalleFromFilm(String idFilm) {
         List<Salle> ls = new ArrayList<>();
-        /*ls = jdbcTemplate.query(
-                "select id, numero, ville from salles where ville = ?", new Object[] { ville },
+        ls = jdbcTemplate.query(
+                "select salle.id, numero, ville, isImax, is3D "
+                        + "from salle, film_salle "
+                        + "where salle.id =  film_salle.id_salle and "
+                        + "film_salle.id_film = ?", new Object[] { idFilm },
                 new RowMapper<Salle>() {
                     @Override
                     public Salle mapRow(ResultSet rs, int rowNum) throws SQLException {
                         return new Salle(rs.getInt("id"), rs.getInt("numero"),
-                                rs.getString("ville"));
+                                rs.getString("ville"), rs.getBoolean("isImax"), rs.getBoolean("is3D"));
                     }
-                });*/
+                });
         return ls;
     }
     
