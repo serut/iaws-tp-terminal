@@ -25,7 +25,7 @@ public class FilmControllerTest extends TestCase {
     @Test
     public void testFilmWithTitleOnimusha() {
         String s = f.getFilm("Onimusha", 0);
-        assertEquals("[{\"id\":\"tt0796361\",\"title\":\"Onimusha: Dawn of Dreams\",\"year\":2006}]", s);
+        assertEquals("[{\"id\":\"tt0796361\",\"title\":\"Onimusha: Dawn of Dreams\",\"year\":2006,\"url\":\"http://www.omdbapi.com/?i=tt0796361&r=xml\"}]", s);
     }
 
     /**
@@ -35,6 +35,6 @@ public class FilmControllerTest extends TestCase {
     @Test
     public void testFilmWithTitleFantasiaAndYear2010() {
         String s = f.getFilm("Fantasia", 1940);
-        assertEquals("[{\"id\":\"tt0032455\",\"title\":\"Fantasia\",\"year\":1940},{\"id\":\"tt0027606\",\"title\":\"Fantasia sottomarina\",\"year\":1940}]",s);
+        assertEquals("[{\"id\":\"tt0032455\",\"title\":\"Fantasia\",\"year\":1940,\"url\":\"http://www.omdbapi.com/?i=tt0032455&r=xml\"},{\"id\":\"tt0027606\",\"title\":\"Fantasia sottomarina\",\"year\":1940,\"url\":\"http://www.omdbapi.com/?i=tt0027606&r=xml\"}]",s);
     }
 }

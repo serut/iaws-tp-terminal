@@ -34,15 +34,15 @@ public class FilmController {
     @Produces("application/json")
     @GET
     @RequestMapping("/film")
-    public String getFilm(@QueryParam("nom") @RequestParam(value = "nom", defaultValue = "") String nom,
+    public String getFilm(@QueryParam("titre") @RequestParam(value = "titre", defaultValue = "") String titre,
                           @QueryParam("annee") @RequestParam(value = "annee", defaultValue = "0") int annee) {
         String result = "";
         try {
-            if (nom.isEmpty() && annee == 0) {
+            if (titre.isEmpty() && annee == 0) {
                 throw new Exception("Mauvais usage de l'API de recherche de film. Vous devez utiliser un de ces filtres : nom, annee");
             }
             FilmClient client = new FilmClient();
-            List<Film> listeFilms = client.filmClientRessourceByTitleAndYear(nom, annee);
+            List<Film> listeFilms = client.filmClientRessourceByTitleAndYear(titre, annee);
 
             ObjectMapper mapper = new ObjectMapper();
             result = mapper.writeValueAsString(listeFilms);

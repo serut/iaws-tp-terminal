@@ -49,15 +49,15 @@ public class FilmTest {
      */
     @org.junit.Test
     public void testFilmAnnee2000() {
-        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=1940&nom=Fantasia");
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=1940&titre=Fantasia");
         String responseMsg = target.request().get(String.class);
-        Assert.assertEquals("[{\"id\":\"tt0032455\",\"title\":\"Fantasia\",\"year\":1940},{\"id\":\"tt0027606\",\"title\":\"Fantasia sottomarina\",\"year\":1940}]", responseMsg);
+        Assert.assertEquals("[{\"id\":\"tt0032455\",\"title\":\"Fantasia\",\"year\":1940,\"url\":\"http://www.omdbapi.com/?i=tt0032455&r=xml\"},{\"id\":\"tt0027606\",\"title\":\"Fantasia sottomarina\",\"year\":1940,\"url\":\"http://www.omdbapi.com/?i=tt0027606&r=xml\"}]", responseMsg);
     }
 
 
     @org.junit.Test
     public void testFilmErreurExceptionPasDeParametre() {
-        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=&nom=");
+        WebTarget target = c.target("http://"+BASE_URI.getHost()+":"+BASE_URI.getPort()+"/film?annee=&titre=");
         String responseMsg = target.request().get(String.class);
         Assert.assertEquals("{\"error\":true,\"reason\":\"Mauvais usage de l'API de recherche de film. Vous devez utiliser un de ces filtres : nom, annee\"}", responseMsg);
     }

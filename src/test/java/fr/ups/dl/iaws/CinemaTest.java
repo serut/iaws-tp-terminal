@@ -8,6 +8,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.*;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -48,7 +49,7 @@ public class CinemaTest extends TestCase {
         }
         WebTarget target = c.target("http://localhost:8987/cinema/1");
         String responseMsg = target.request().get(String.class);
-        assertEquals("[{\"id\":\"2\",\"title\":\"Lol\",\"year\":2004},{\"id\":\"323242\",\"title\":\"Lol\",\"year\":2004},{\"id\":\"23\",\"title\":\"Lol\",\"year\":2004}]", responseMsg);
+        assertEquals("[{\"id\":\"2\",\"title\":\"Lol\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=2&r=xml\"},{\"id\":\"323242\",\"title\":\"Lol\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=323242&r=xml\"},{\"id\":\"23\",\"title\":\"Lol\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=23&r=xml\"}]", responseMsg);
     }
 
 }

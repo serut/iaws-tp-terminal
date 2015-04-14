@@ -42,4 +42,8 @@ public class Film {
     }
     
     public String toString() {return "OMDBId: " + id + " Title: " + title + " Year: " + year;}
+
+    public String getUrl() {
+        return "http://www.omdbapi.com/?i=" + id + "&r=xml";
+    }
 }
