@@ -1,5 +1,7 @@
 package fr.ups.dl.iaws.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Created by Cédric Rohaut (@Oxynos) on 23/03/15 16:16.
  */
