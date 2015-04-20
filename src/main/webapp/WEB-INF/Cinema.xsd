@@ -1,12 +1,11 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:hr="http://fr/ups/dl/iaws/contractfirst/results"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified"
-           targetNamespace="http://fr/ups/dl/iaws/contractfirst/results">
+           targetNamespace="http://cinemas">
     <xs:element name="CinemaRequest">
         <xs:complexType>
             <xs:all>
-                <xs:element name="Film" type="hr:FilmType"/>
+                <xs:element name="Film" type="FilmType"/>
             </xs:all>
         </xs:complexType>
     </xs:element>

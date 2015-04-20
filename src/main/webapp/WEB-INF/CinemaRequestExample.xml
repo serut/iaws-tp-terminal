@@ -1,5 +1,5 @@
-<CinemaRequest xmlns="http://fr/ups/dl/iaws/contractfirst/results" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://fr/ups/dl/iaws/contractfirst/results Cinema.xsd">
+<CinemaRequest xmlns="http://cinemas" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://cinemas Cinema.xsd">
         <Film>
             <id>1</id>
         </Film>

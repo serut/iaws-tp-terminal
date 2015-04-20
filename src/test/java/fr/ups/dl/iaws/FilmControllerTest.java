@@ -25,7 +25,7 @@ public class FilmControllerTest extends TestCase {
     @Test
     public void testFilmWithTitleOnimusha() {
         String s = f.getFilm("Onimusha", 0);
-        assertEquals("[{\"id\":\"tt0796361\",\"title\":\"Onimusha: Dawn of Dreams\",\"year\":2006,\"url\":\"http://www.omdbapi.com/?i=tt0796361&r=xml\"}]", s);
+        assertEquals("[{\"id\":\"tt0363858\",\"title\":\"Onimusha 3: Demon Siege\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=tt0363858&r=xml\"},{\"id\":\"tt0796361\",\"title\":\"Onimusha: Dawn of Dreams\",\"year\":2006,\"url\":\"http://www.omdbapi.com/?i=tt0796361&r=xml\"},{\"id\":\"tt0405223\",\"title\":\"Onimusha Blade Warriors\",\"year\":2004,\"url\":\"http://www.omdbapi.com/?i=tt0405223&r=xml\"}]", s);
     }
 
     /**
