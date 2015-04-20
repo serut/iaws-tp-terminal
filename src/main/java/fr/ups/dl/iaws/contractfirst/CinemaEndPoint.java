@@ -1,5 +1,6 @@
 package fr.ups.dl.iaws.contractfirst;
 
+import fr.ups.dl.iaws.XmlHelper;
 import fr.ups.dl.iaws.model.Salle;
 import fr.ups.dl.iaws.model.Salles;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -7,7 +8,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import org.springframework.ws.server.endpoint.annotation.XPathParam;
 
-import javax.xml.bind.Element;
+import org.w3c.dom.Element;
 import java.util.List;
 
 /**
@@ -23,13 +24,13 @@ public class CinemaEndPoint {
 
         @PayloadRoot(localPart="CinemaRequest", namespace = NAMESPACE_URI)
         @ResponsePayload
-        public void handleCinemaRequest(@XPathParam("/CinemaRequest/id") int id) throws Exception {
+        public Element handleCinemaRequest(@XPathParam("/CinemaRequest/id") int id) throws Exception {
 
             salles =  serviceSalle.getSalleFromFilm(String.valueOf(id));
 
-            //Element elt = XmlHelper.getRootElementFromFileInClasspath("ReleveNotes.xml") ;
+            Element elt = XmlHelper.getRootElementFromFileInClasspath("ReleveNotes.xml");
 
-            System.out.println(id);
+            return elt;
         }
 
 
